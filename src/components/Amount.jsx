@@ -7,7 +7,7 @@ export default function Amount({value, label, onIncrement, onDecrement, onNext})
       <h1>{value}</h1>
       <button onClick={onIncrement}>+</button>
       <button onClick={onDecrement}>-</button>
-      <button onClick={onNext}>next</button>
+      <button onClick={onNext}>Next but not first</button>
     </section>
   );
 }
