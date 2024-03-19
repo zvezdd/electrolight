@@ -37,3 +37,6 @@ export const differences = {
   program:
     "Концентрация знаний. Например, модуль «HTML&CSS» даст вам столько же умений и навыков, как и 6 месяцев обучения по этой программе в госуниверситете.",
 };
+export const sau = {
+  label: "how much did you got from sau",
+};

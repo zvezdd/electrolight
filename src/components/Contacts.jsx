@@ -1,85 +1,48 @@
-import React, { useState, useRef } from "react";
-import Button from "./Button/Button";
-
-function StateVsRef() {
-  const input = useRef();
-  const [show, setShow] = useState(false);
-
-  function handleKeyDown(event) {
-    if (event.key === 'Enter') {
-      setShow(true)
-    }
-  }
-  return (
-    <div style={{ marginBottom: "5rem" }}>
-      <h3>Input value:{show && input.current.value}</h3>
-      <input
-        ref={input}
-        type="text"
-        className="control"
-        onKeyDown={handleKeyDown}
-      />
-    </div>
-  );
-}
+import React from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export default function Contacts() {
-  const [name, setName] = useState("");
-  const [reason, setReason] = useState("help");
-  const [hasError, setHasError] = useState(false);
 
-  function handleNameChange(event) {
-    setName(event.target.value);
-    setHasError(event.target.value.trim().length === 0);
-  }
+  const schema = yup.object().shape({
+    fullName: yup.string().required("your full name is required"),
+    email: yup.string().email().required("your email is required"),
+    age: yup.number().positive().integer().max(4).required("your age is required"),
+    password: yup.string().min(4).max(20).required("your password is required"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords don't match")
+      .required("your passworde is required"),
+  });
+  
+  const { register, handleSubmit, formState: {errors} } = useForm({
+    resolver: yupResolver(schema)
+  });
 
-  function toggleError(params) {
-    setHasError((prev) => !prev);
-    setHasError(!hasError);
-  }
 
+  
   return (
-    <section>
-      <Button onClick={toggleError}>Toggle error</Button>
-      <h3>Here are our contacts:</h3> <br />
-      {/* <a href="https://www.instagram.com/zvezd_d?igsh=MXNzNWJjNGw1NzM4eQ%3D%3D&utm_source=qr">
-        Instagram
-      </a> */}
-      <form style={{ marginBottom: "1rem" }}>
-        <label htmlFor="name">Your name</label>
-        <input
-          type="text"
-          id="name"
-          className="control"
-          value={name}
-          onChange={handleNameChange}
-          style={{
-            border: hasError ? "1px solid red" : null,
-          }}
-        />
-        <label htmlFor="reason">Your name</label>
-        <select
-          id="reason"
-          className="control"
-          value={reason}
-          onChange={(event) => setReason(event.target.value)}
-        >
-          <option value="error" key="">
-            Error
-          </option>
-          <option value="help" key="">
-            Need help
-          </option>
-          <option value="suggest" key="">
-            Suggestions
-          </option>
-        </select>
-
-        <Button disabled={hasError} isActive={!hasError}>
-          Send
-        </Button>
-      </form>
-      <StateVsRef />
-    </section>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input type="text" placeholder="Full name..." {...register("fullName")} />
+      <p>{errors.fullName?.message}</p>
+      <input type="text" placeholder="Email..." {...register("email")} />
+      <p>{errors.email?.message}</p>
+      <input type="number" placeholder="Age..." {...register("age")} />
+      <p>{errors.age?.message}</p>
+      <input
+        type="password"
+        placeholder="Password..."
+        {...register("password")}
+      />
+      <p>{errors.password?.message}</p>
+      <input
+        type="password"
+        placeholder="Confirm password..."
+        {...register("confirmPassword")}
+      />
+      <p>{errors.confirmPassword?.message}</p>
+      <input type="submit" />
+    </form>
   );
 }

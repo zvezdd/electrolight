@@ -5,9 +5,9 @@ export default function Amount({value, label, onIncrement, onDecrement, onNext})
     <section>
       <h1>{label}</h1>
       <h1>{value}</h1>
-      <button onClick={onIncrement}>+</button>
-      <button onClick={onDecrement}>-</button>
-      <button onClick={onNext}>neut</button>
+      <button className="btnCalc" onClick={onIncrement}>+</button>
+      <button className="btnCalc" onClick={onDecrement}>-</button>
+      <button className="btnCalc" onClick={onNext}>next</button>
     </section>
   );
 }

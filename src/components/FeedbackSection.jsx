@@ -4,6 +4,7 @@ import "../App.css";
 import Sau1 from "./Sau1";
 import Sau2 from "./Sau2";
 import Amount from "./Amount";
+import {sau} from "../data"
 
 export default function FeedbackSection() {
   const [sau1, setSau1] = useState(0);
@@ -24,7 +25,7 @@ export default function FeedbackSection() {
   return (
     <section>
       <Amount
-        label="how much sau do you have?"
+        label={sau}
         value={amount}
         onIncrement={() => setAmount(amount + 1)}
         onDecrement={() => setAmount(amount - 1)}
@@ -32,25 +33,26 @@ export default function FeedbackSection() {
       />
       { renderComponent && amount === 1 && (
         <Sau1
-          label="how much did you get from Sau1?"
+          label={sau}
           value={sau1}
           onIncrement={() => setSau1(sau1 + 1)}
           onDecrement={() => setSau1(sau1 - 1)}
           onReset={() => setSau1(0)}
+          renderComponent={renderComponent}
         />
       )}
 
       { renderComponent && amount === 2 && (
         <>
           <Sau1
-            label="how much did you get from Sau1?"
+            label={sau}
             value={sau1}
             onIncrement={() => setSau1(sau1 + 1)}
             onDecrement={() => setSau1(sau1 - 1)}
             onReset={() => setSau1(0)}
           />
           <Sau2
-            label="how much did you get from Sau2?"
+            label={sau}
             value={sau2}
             onIncrement={() => setSau2(sau2 + 1)}
             onDecrement={() => setSau2(sau2 - 1)}
