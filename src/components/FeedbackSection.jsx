@@ -25,7 +25,7 @@ export default function FeedbackSection() {
   return (
     <section>
       <Amount
-        label={sau}
+        label="how many saus do you have?"
         value={amount}
         onIncrement={() => setAmount(amount + 1)}
         onDecrement={() => setAmount(amount - 1)}

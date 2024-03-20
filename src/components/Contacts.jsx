@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 export default function Contacts() {
+  const [form, setForm] = useState({});
+  const [formBoolean, setFormBoolean] = useState(false);
 
   const schema = yup.object().shape({
     fullName: yup.string().required("your full name is required"),
@@ -19,6 +21,11 @@ export default function Contacts() {
   const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: yupResolver(schema)
   });
+
+  const onSubmit = (data) => {
+    setForm(data)
+    setFormBoolean(true)
+  }
 
 
   
@@ -43,6 +50,7 @@ export default function Contacts() {
       />
       <p>{errors.confirmPassword?.message}</p>
       <input type="submit" />
+      <p>{ formBoolean && JSON.stringify(form)}</p>
     </form>
   );
 }
