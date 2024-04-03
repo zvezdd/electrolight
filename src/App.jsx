@@ -10,6 +10,7 @@ import TabsSection from "./components/TabsSection";
 import FeedbackSection from "./components/FeedbackSection";
 import Contacts from "./components/Contacts";
 import EffectSection from "./components/EffectSection";
+import Media from "./components/Media";
 
 function App() {
   const [visible, setVisible] = useState(true);
@@ -50,6 +51,11 @@ function App() {
         {tab === "effect" && (
           <>
             <EffectSection />
+          </>
+        )}
+        {tab === "media" && (
+          <>
+            <Media />
           </>
         )}
       </main>

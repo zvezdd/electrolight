@@ -32,23 +32,23 @@ export default function Contacts() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="text" placeholder="Full name..." {...register("fullName")} />
-      <p>{errors.fullName?.message}</p>
+      <p className="error" >{errors.fullName?.message}</p>
       <input type="text" placeholder="Email..." {...register("email")} />
-      <p>{errors.email?.message}</p>
+      <p className="error">{errors.email?.message}</p>
       <input type="number" placeholder="Age..." {...register("age")} />
-      <p>{errors.age?.message}</p>
+      <p className="error">{errors.age?.message}</p>
       <input
         type="password"
         placeholder="Password..."
         {...register("password")}
       />
-      <p>{errors.password?.message}</p>
+      <p className="error">{errors.password?.message}</p>
       <input
         type="password"
         placeholder="Confirm password..."
         {...register("confirmPassword")}
       />
-      <p>{errors.confirmPassword?.message}</p>
+      <p className="error">{errors.confirmPassword?.message}</p>
       <input type="submit" />
       <p>{ formBoolean && JSON.stringify(form)}</p>
     </form>

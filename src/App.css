@@ -16,6 +16,10 @@
   justify-content: space-around;
 }
 
+.error {
+  color: red;
+}
+
 .btnCalc {
   margin: 1rem;
   display: inline-block;
